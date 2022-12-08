@@ -1,0 +1,15 @@
+#Define the source OU
+$SourceOU = "OU=SourceOU,DC=domain,DC=local"
+
+#Define the destination OU
+$DestinationOU = "OU=DestinationOU,DC=domain,DC=local"
+
+#Get all users from the source OU
+$Users = Get-ADUser -Filter * -SearchBase $SourceOU
+
+#Loop through each user
+foreach ($User in $Users)
+{
+    #Move the user to the destination OU
+    Move-ADObject -Identity $User -TargetPath $DestinationOU
+}
